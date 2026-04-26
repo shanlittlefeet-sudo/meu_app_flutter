@@ -4,12 +4,22 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
+      ios_signing:
+        distribution_type: development
+        bundle_identifier: com.henriquefuentes.cartapp
     scripts:
-      - flutter pub get
-      - flutter build ios --release --no-codesign
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build iOS
+        script: |
+          flutter build ios --release \
+            --bundle-identifier com.henriquefuentes.cartapp
     artifacts:
       - build/ios/iphoneos/*.ipa
     publishing:
       email:
         recipients:
-          - shanlittlefeet@gmail.com
+          - henriquefuentes@gmail.com
+        notify:
+          success: true
+          failure: true
