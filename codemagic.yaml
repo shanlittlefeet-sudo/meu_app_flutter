@@ -6,11 +6,11 @@ workflows:
       xcode: latest
     scripts:
       - name: Install dependencies
-        script: flutter pub get
+        script: cd cart_app && flutter pub get
       - name: Build iOS Simulator
-        script: flutter build ios --simulator --debug
+        script: cd cart_app && flutter build ios --simulator --debug
     artifacts:
-      - build/ios/iphonesimulator/Runner.app
+      - cart_app/build/ios/iphonesimulator/Runner.app
     publishing:
       email:
         recipients:
@@ -25,11 +25,11 @@ workflows:
       flutter: stable
     scripts:
       - name: Install dependencies
-        script: flutter pub get
+        script: cd cart_app && flutter pub get
       - name: Build Android APK
-        script: flutter build apk --release
+        script: cd cart_app && flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/app-release.apk
+      - cart_app/build/app/outputs/flutter-apk/app-release.apk
     publishing:
       email:
         recipients:
