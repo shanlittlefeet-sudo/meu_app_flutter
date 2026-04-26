@@ -1,11 +1,39 @@
 workflows:
-  ios-workflow:
-    name: iOS Build
+  ios-simulator:
+    name: iOS Simulator Build
     environment:
       flutter: stable
       xcode: latest
     scripts:
-      - cd cart_app && flutter pub get
-      - cd cart_app && flutter build ios --release --no-codesign
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build iOS Simulator
+        script: flutter build ios --simulator --debug
     artifacts:
-      - cart_app/build/ios/iphoneos/*.ipa
+      - build/ios/iphonesimulator/Runner.app
+    publishing:
+      email:
+        recipients:
+          - henriquefuentes@gmail.com
+        notify:
+          success: true
+          failure: true
+
+  android-workflow:
+    name: Android APK Build
+    environment:
+      flutter: stable
+    scripts:
+      - name: Install dependencies
+        script: flutter pub get
+      - name: Build Android APK
+        script: flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - henriquefuentes@gmail.com
+        notify:
+          success: true
+          failure: true
