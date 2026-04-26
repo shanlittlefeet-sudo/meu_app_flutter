@@ -7,6 +7,11 @@ workflows:
     scripts:
       - name: Install dependencies
         script: cd cart_app && flutter pub get
+      - name: Fix iOS deployment target
+        script: |
+          cd cart_app/ios
+          sed -i '' "s/platform :ios, '.*'/platform :ios, '12.0'/" Podfile
+          pod install --repo-update
       - name: Build iOS Simulator
         script: cd cart_app && flutter build ios --simulator --debug
     artifacts:

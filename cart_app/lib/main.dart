@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as p;
 import 'package:shared_preferences/shared_preferences.dart';
 
 /* =========================
@@ -248,7 +248,7 @@ class DB {
 
   Future<Database> get db async {
     if (_db != null) return _db!;
-    final path = join(await getDatabasesPath(), 'app.db');
+    final path = p.join(await getDatabasesPath(), 'app.db');
 
     _db = await openDatabase(
       path,
